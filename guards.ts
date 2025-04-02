@@ -74,3 +74,14 @@ function useUserMethods(currentUser: CurrentUser) {
   }
   currentUser.greet(); // someUser-only method
 }
+
+// You can outsource the logic of the Type Guard if you believe it will be repeated often:
+function isFile(source: Source) {
+  // check the return type here, it's called type predicate. This is an extra feature of typescript. It understands that if this function returns true, the source is of type FileSource. And that adds some extra features to the function's output.
+  return source.type === "file";
+}
+// now you can use the isFile function instead of the complete if statement when Type Guarding.
+// It will return a boolean, so true if source.type is file and false if not.
+if (isFile(fileSource)) {
+  // logic if true
+}
