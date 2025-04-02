@@ -6,6 +6,9 @@ type DataStore = {
 
 let store: DataStore = {};
 
+let someObj: Record<string, number | boolean>; // this is essentially the same thing
+//  as the previous type definition. The difference is that this can't be used the same way.
+
 // ...
 
 store.id = 5;
