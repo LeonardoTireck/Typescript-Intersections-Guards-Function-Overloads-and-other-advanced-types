@@ -43,3 +43,34 @@ function loadData(source: Source) {
   }
   source.connectionUrl; // -> available after guard
 }
+
+// There is a similar feature you can use when dealing with classes instead of types and interfaces.
+// That's the "instanceof" operator. With is used inside the type guards if statement to check
+// from which class the functions parameter is instantiated from.
+
+class SomeUser {
+  constructor(public name: string) {}
+
+  greet() {
+    // someUser-only method
+  }
+}
+
+class Admin {
+  constructor(public name: string, public level: 1 | 2 | 3) {}
+
+  deleteUser() {
+    // admin-only method
+  }
+}
+
+type CurrentUser = SomeUser | Admin;
+
+function useUserMethods(currentUser: CurrentUser) {
+  // now we apply the instanceof operator on the type guard
+  if (currentUser instanceof Admin) {
+    currentUser.deleteUser(); // admin-only method
+    return;
+  }
+  currentUser.greet(); // someUser-only method
+}
